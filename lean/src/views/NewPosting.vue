@@ -8,7 +8,7 @@
       <b-field label="Job Description">
           <b-input v-model="posting.contact"></b-input>
       </b-field>
-      <b-field label="Skills (enter to seperate)">
+      <b-field label="Skills (comma to seperate)">
         <b-input v-model="posting.skills"></b-input>
       </b-field>
 
@@ -18,39 +18,41 @@
       
       <div class="buttons">
         <b-button @click="save()">Save</b-button>
-        <router-link :to="MyPostings"><b-button @click="cancel()">Cancel</b-button></router-link>
+        <router-link to="/"><b-button @click="cancel()">Cancel</b-button></router-link>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'NewPosting',
-  data: {
-    posting: {
-        name: null,
-        description: null,
-        skills: null,
-        companyName: null,
-        companyContact: null,
-        companyWebsite: null,
-        companyDescription: null,
-        companyLinkedIn: null
-    },
-    company: {}
+  data(){
+    return {
+      posting: {
+          name: null,
+          description: null,
+          skills: null,
+          companyName: null,
+          companyContact: null,
+          companyWebsite: null,
+          companyDescription: null,
+          companyLinkedIn: null
+      }
+    }
   },
   created(){
-        const firebaseConfig = {
-      apiKey: "AIzaSyD2HZX8KeYTbeNMA9G4Q79jT2fvWTnRjM8",
-      authDomain: "mentorme-896c4.firebaseapp.com",
-      databaseURL: "https://mentorme-896c4.firebaseio.com",
-      projectId: "mentorme-896c4",
-      storageBucket: "mentorme-896c4.appspot.com",
-      messagingSenderId: "877888191358",
-      appId: "1:877888191358:web:403a86f068e94d2a00512f",
-      measurementId: "G-P7M2C1M8DQ"
-    };
+     var firebaseConfig = {
+    apiKey: "AIzaSyAWnWmesrGAEnm8khsANTCLiivFHhC4LtI",
+    authDomain: "lean-job-finder.firebaseapp.com",
+    databaseURL: "https://lean-job-finder.firebaseio.com",
+    projectId: "lean-job-finder",
+    storageBucket: "lean-job-finder.appspot.com",
+    messagingSenderId: "481800294263",
+    appId: "1:481800294263:web:4aa800218f2bd905729b72"
+  };
     if(firebase.apps.length === 0){
           firebase.initializeApp(firebaseConfig);
     }
@@ -72,7 +74,9 @@ export default {
   },
   methods: {
     save(key, index){
-      firebase.firestore().collection("postings").doc(key).update(this.posting);
+      firebase.firestore().collection("postings").add(this.posting).then(() => {
+        this.$router.push("/")
+      });
     }
   }
 }

@@ -1,10 +1,10 @@
 <template>
-  <div class="container">
+  <div class="section container">
     <div class="buttons">
       <b-button @click="newListing()">Create New Listing</b-button>
-      <router-link :to="MyInformation"><b-button>Edit My Information</b-button></router-link>
+      <router-link to="/information"><b-button>Edit My Information</b-button></router-link>
     </div>
-    <div class="section" v-for="(posting, index) in postings" :key="posting.key">
+    <div class="section card" v-for="(posting, index) in postings" :key="posting.key">
       <b-field label="Job Title">
       <b-input v-model="posting.name"></b-input>
       </b-field>
@@ -17,6 +17,7 @@
 
       <div class="section" v-for="candidate in posting.candidates" :key="candidate.key">
         <a href="candidate.linkedIn">{{candidate.name}}</a>
+        Contact: {{candidate.contact}}
       </div>
       
       <div class="buttons">
@@ -29,22 +30,25 @@
 </template>
 
 <script>
+import firebase from 'firebase'
+
 export default {
   name: 'MyPostings',
-  data: {
-    postings: [],
+  data(){
+    return {
+      postings: []
+    }
   },
   created(){
-        const firebaseConfig = {
-      apiKey: "AIzaSyD2HZX8KeYTbeNMA9G4Q79jT2fvWTnRjM8",
-      authDomain: "mentorme-896c4.firebaseapp.com",
-      databaseURL: "https://mentorme-896c4.firebaseio.com",
-      projectId: "mentorme-896c4",
-      storageBucket: "mentorme-896c4.appspot.com",
-      messagingSenderId: "877888191358",
-      appId: "1:877888191358:web:403a86f068e94d2a00512f",
-      measurementId: "G-P7M2C1M8DQ"
-    };
+     var firebaseConfig = {
+    apiKey: "AIzaSyAWnWmesrGAEnm8khsANTCLiivFHhC4LtI",
+    authDomain: "lean-job-finder.firebaseapp.com",
+    databaseURL: "https://lean-job-finder.firebaseio.com",
+    projectId: "lean-job-finder",
+    storageBucket: "lean-job-finder.appspot.com",
+    messagingSenderId: "481800294263",
+    appId: "1:481800294263:web:4aa800218f2bd905729b72"
+  };
     if(firebase.apps.length === 0){
           firebase.initializeApp(firebaseConfig);
     }
@@ -53,13 +57,14 @@ export default {
     }
 
     firebase.firestore().collection("companies").doc(firebase.auth().currentUser.uid).get().then((doc) => {
-      console.log(doc);
+      console.log(doc.data());
       var d = doc.data();
-      var email = d.email;
-      firebase.firestore().collection("postings").where("companyEmail", "==", email).get().then(querySnapshot => {
+      var name = d.name;
+      firebase.firestore().collection("postings").where("companyName", "==", name).get().then(querySnapshot => {
         querySnapshot.forEach(doc => {
           var data = doc.data();
-          data.key = doc.key;
+          console.log(doc.id)
+          data.key = doc.id;
           data.candidates = []
           this.postings.push(data);
         })
@@ -81,12 +86,12 @@ export default {
       firebase.firestore().collection("postings").doc(key).update(this.postings[index]);
     },
     del(key, index){
-      firebase.firestore().collection("postings").delete().then(() => {
+      firebase.firestore().collection("postings").doc(key).delete().then(() => {
         this.postings.splice(index, 1);
       })
     },
-    newPosting(){
-      this.$router.push("NewPosting");
+    newListing(){
+      this.$router.push("/new");
     }
   }
 }

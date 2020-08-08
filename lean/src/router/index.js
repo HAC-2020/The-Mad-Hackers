@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Login from '../views/Login.vue'
 import MyPostings from '../views/MyPostings.vue'
 import NewPosting from '../views/NewPosting.vue'
-import MyInformation from '../views/MyInformation.vue'
+import Info from '../views/Info.vue'
 
 Vue.use(VueRouter)
 
@@ -25,8 +25,8 @@ Vue.use(VueRouter)
   },
   {
     path: '/information',
-    name: 'MyInformation',
-    component: MyInformation
+    name: 'Info',
+    component: Info
   }
 ]
 

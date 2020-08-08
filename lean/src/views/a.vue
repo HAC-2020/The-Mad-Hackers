@@ -25,27 +25,28 @@ import firebase from 'firebase'
 
 export default {
   name: 'MyInformation',
-  data: () => ({
-    information: {
+  data(){
+    return {
+      information: {
         name: null,
         contact: null,
         linkedIn: null,
         description: null,
         website: null
+      }
     }
-  }),
+  },
   created(){
-    const firebaseConfig = {
-      apiKey: "AIzaSyD2HZX8KeYTbeNMA9G4Q79jT2fvWTnRjM8",
-      authDomain: "mentorme-896c4.firebaseapp.com",
-      databaseURL: "https://mentorme-896c4.firebaseio.com",
-      projectId: "mentorme-896c4",
-      storageBucket: "mentorme-896c4.appspot.com",
-      messagingSenderId: "877888191358",
-      appId: "1:877888191358:web:403a86f068e94d2a00512f",
-      measurementId: "G-P7M2C1M8DQ"
-    };
-    if(firebase.apps.length === 0){
+    var firebaseConfig = {
+    apiKey: "AIzaSyAWnWmesrGAEnm8khsANTCLiivFHhC4LtI",
+    authDomain: "lean-job-finder.firebaseapp.com",
+    databaseURL: "https://lean-job-finder.firebaseio.com",
+    projectId: "lean-job-finder",
+    storageBucket: "lean-job-finder.appspot.com",
+    messagingSenderId: "481800294263",
+    appId: "1:481800294263:web:4aa800218f2bd905729b72"
+  };
+    if(firebase.apps.length == 0){
           firebase.initializeApp(firebaseConfig);
     }
     if(!firebase.auth().currentUser){
@@ -63,6 +64,7 @@ export default {
   methods: {
     save(){
         firebase.firestore().collection("companies").doc(firebase.auth().currentUser.uid).update(this.infomration);
+        this.$router.push("/");
     }
   }
 }
