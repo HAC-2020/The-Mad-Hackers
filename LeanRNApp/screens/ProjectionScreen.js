@@ -5,7 +5,7 @@ import {WebView} from 'react-native-webview'
 
 const employmentprojections = 'https://www.bls.gov/emp/'
 
-export default class PostScreen extends React.Component{
+export default class ProjectionScreen extends React.Component{
     constructor(props) {
         super(props)
 

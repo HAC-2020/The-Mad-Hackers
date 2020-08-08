@@ -10,6 +10,7 @@ import ProjectionScreen from './screens/ProjectionScreen'
 import TJScreen from './screens/TJ'
 import FundingScreen from './screens/FundingScreen'
 import  {Button, Alert} from 'react-native'
+import JobsResultsScreen from './screens/JobsResultsScreen'
 import LoadingScreen from './screens/LoadingScreen'
 import RegisterScreen from './screens/RegisterScreen'
 import {IconButton, Colors} from 'react-native-paper'
@@ -94,7 +95,11 @@ function TJSection() {
       <TJStack.Screen name="Temporary Jobs" component={TJScreen}
         options={{
           headerTitle: "Temporary Jobs",
-          headerLeft: null,
+        }}
+      />
+       <TJStack.Screen name="Details" component={JobsResultsScreen}
+        options={{
+          headerTitle: "Details",
         }}
       />
     </TJStack.Navigator>

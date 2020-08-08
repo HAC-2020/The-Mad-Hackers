@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, StyleSheet, FlatList, Image} from 'react-native'
+import {View, Text, StyleSheet, FlatList, Image, RefreshControl, ScrollView} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {Ionicons, Foundation, AntDesign} from "@expo/vector-icons"
 const themecolor = '#fff'
@@ -14,13 +14,28 @@ const jobposts = [
         avatar: require("../assets/LEAN.jpg"),
         image: require("../assets/LEAN.jpg"),
         applicants: '1',
-        skills: 'Project Management, Creativity and More'
     }
 ]
 export default class ProfileScreen extends React.Component{
+    constructor(props){
+        super(props)
+    
+        this.state = {
+          refreshing: false,
+          checkingForPosts: 0,
+        }
+    }
 
-
-
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        setTimeout(() => {
+          let oldPosts = this.state.checkingForPosts
+          this.setState({
+            checkingForPosts: oldPosts + 1,
+            refreshing: false,
+          });
+        }, 2000);
+      };
     renderJobPost = jobpost => {
         return (
             <View>
@@ -51,6 +66,17 @@ export default class ProfileScreen extends React.Component{
 
     render(){
         return(
+            <ScrollView
+         refreshControl={
+          <RefreshControl
+            refreshing={this.state.refreshing}
+            onRefresh={this._onRefresh}
+            title="Getting Data..."
+            progressBackgroundColor="#ffff00"
+          />
+        }
+        >
+
             <View style={styles.container}>
                 <FlatList 
                 style={styles.feed}
@@ -59,6 +85,7 @@ export default class ProfileScreen extends React.Component{
                 showsVerticalScrollIndicator={false}
                 />
             </View>
+        </ScrollView>
         )
     }
 }

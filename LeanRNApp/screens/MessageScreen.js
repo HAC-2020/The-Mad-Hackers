@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 
-export default class FundingeScreen extends React.Component{
+export default class MessageScreen extends React.Component{
 
     render(){
         return(
