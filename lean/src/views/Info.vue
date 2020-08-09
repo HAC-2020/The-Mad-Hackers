@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="section">
         <h1 class="title is-3">Company Information</h1>
     <b-field label="Company Name">
       <b-input v-model="information.name"></b-input>

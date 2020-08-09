@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="section">
     <h1 class="title is-3">Admin/Company Login/Signup</h1>
     <b-field label="Email">
       <b-input v-model="email"></b-input>
@@ -8,7 +8,7 @@
       <b-input type="password" v-model="password" password-reveal></b-input>
     </b-field>
     <p>{{errorMessage}}</p>
-    <div class="level">
+    <div class="buttons">
     <b-button @click="login">Login</b-button>
     <b-button @click="signup">Signup</b-button>
     </div>
@@ -45,7 +45,7 @@ export default {
       firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
         this.$router.push('/');
       }).catch(error => {
-        this.errMessage = error.message;
+        this.errorMessage = error.message;
       })
     },
     signup(){

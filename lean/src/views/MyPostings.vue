@@ -15,7 +15,7 @@
         <b-input v-model="posting.skills"></b-input>
       </b-field>
 
-      <div class="section" v-for="candidate in posting.candidates" :key="candidate.key">
+      <div class="section card" v-for="candidate in posting.candidates" :key="candidate.key">
         <a href="candidate.linkedIn">{{candidate.name}}</a>
         Contact: {{candidate.contact}}
       </div>
@@ -78,7 +78,7 @@ export default {
         querySnapshot.forEach(doc => {
           var candidate = doc.data();
           candidate.key = doc.id;
-          this.postings[index].push(candidate);
+          this.postings[index].candidates.push(candidate);
         })
       })
     },
