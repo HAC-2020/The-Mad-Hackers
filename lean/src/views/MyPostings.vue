@@ -15,15 +15,15 @@
         <b-input v-model="posting.skills"></b-input>
       </b-field>
 
-      <div class="section card" v-for="candidate in posting.candidates" :key="candidate.key">
-        <a href="candidate.linkedIn">{{candidate.name}}</a>
+      <div class="section card" style="margin: 10px;" v-for="candidate in posting.candidates" :key="candidate.key">
+        <a @click="externalLink(candidate.linkedIn)">{{candidate.name}}</a>
         Contact: {{candidate.contact}}
       </div>
       
       <div class="buttons">
         <b-button @click="listCandidates(posting.key, index)">List Candidates</b-button>
         <b-button @click="save(posting.key, index)">Save</b-button>
-        <b-button @click="del(index)">Delete</b-button>
+        <b-button @click="del(posting.key, index)">Delete</b-button>
       </div>
     </div>
   </div>
@@ -92,6 +92,9 @@ export default {
     },
     newListing(){
       this.$router.push("/new");
+    },
+    externalLink(whereto){
+      window.location = whereto
     }
   }
 }
