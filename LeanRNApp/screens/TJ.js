@@ -106,7 +106,7 @@ export default class Search extends React.Component {
         /> */}
        <View style={styles.search}> 
          <TextInput
-              placeholder="Find Information regarding a location"
+              placeholder="Find low skill jobs near a certain area"
               placeholderTextColor="#D3D3D3"
               autoCapitalize="none"
               style={{flex: 1, padding: 0}}

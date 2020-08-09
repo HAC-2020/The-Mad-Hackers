@@ -3,9 +3,9 @@ import {View, Text, StyleSheet, Platform, Alert, ActivityIndicator} from 'react-
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {WebView} from 'react-native-webview'
 
-const employmentprojections = 'https://datawrapper.dwcdn.net/bW99X/1/'
+const forumcatalog = 'https://lean-jobs.tribe.so'
 
-export default class ProjectionScreen extends React.Component{
+export default class PostScreen extends React.Component{
     constructor(props) {
         super(props)
 
@@ -15,7 +15,7 @@ export default class ProjectionScreen extends React.Component{
     }
     render(){
         return(
-            <WebView source={{ uri: employmentprojections }} />
+            <WebView source={{ uri: forumcatalog }} onLoadEnd={() =>this.setState({isLoaded: true})} />
         )
     }
 }

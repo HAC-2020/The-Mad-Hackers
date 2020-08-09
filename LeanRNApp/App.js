@@ -4,17 +4,21 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
 import LoginView from'./screens/LoginScreen'
 import CoursesScreen from'./screens/CoursesScreen'
-import {MaterialIcons ,Ionicons, Octicons, Entypo} from '@expo/vector-icons'
+import {MaterialIcons ,Ionicons, Octicons, Entypo, MaterialCommunityIcons} from '@expo/vector-icons'
 import JobsScreen from './screens/JobsScreen'
 import ProjectionScreen from './screens/ProjectionScreen'
 import TJScreen from './screens/TJ'
-import FundingScreen from './screens/FundingScreen'
+import ForumScreen from './screens/ForumScreen'
 import  {Button, Alert} from 'react-native'
 import JobsResultsScreen from './screens/JobsResultsScreen'
+import FGJScreen from './screens/FGJScreen'
 import LoadingScreen from './screens/LoadingScreen'
+import ComparisonScreen from './screens/ComparisonScreen'
+import {createMaterialTopTabNavigator} from '@react-navigation/material-top-tabs'
 import RegisterScreen from './screens/RegisterScreen'
 import {IconButton, Colors} from 'react-native-paper'
 import Firebasekeys from './config'
+import FormSubmissionScreen from './screens/FormSubmission'
 import * as firebase from 'firebase'
 
 const themecolor = '#fff'
@@ -25,7 +29,7 @@ const JobsStack = createStackNavigator()
 const CoursesStack = createStackNavigator()
 const TJStack = createStackNavigator()
 const FundingStack = createStackNavigator()
-
+const Resources = createMaterialTopTabNavigator()
 let firebaseConfig = Firebasekeys
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
@@ -33,6 +37,29 @@ if (!firebase.apps.length) {
 let user = firebase.auth().currentUser
 const LoginScreen = ({ navigation }) => (<LoginView navigation={this.props.navigation}/>);
 
+function ResourcesSection() {
+  
+  return (
+    <Resources.Navigator initialRouteName="Jobs"
+    screenOptions={{
+      headerStyle: {
+        backgroundColor: `${tabcolor}`,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        color: `${themecolor}`
+      },
+    }}
+    >
+      <Resources.Screen name="STEM vs Non-STEM" component={ComparisonScreen}
+      />
+      <Resources.Screen name="Fastest Growing Jobs" component={FGJScreen}
+      />
+      <Resources.Screen name="Jobs of the Future" component={ProjectionScreen}
+      />
+    </Resources.Navigator>
+  );
+}
 function JobsSection() {
   
   return (
@@ -51,6 +78,11 @@ function JobsSection() {
         options={{
           headerTitle: "Latest Job Offerings",
           headerLeft: null,
+        }}
+      />
+      <JobsStack.Screen name="Form Submission" component={FormSubmissionScreen}
+        options={{
+          headerTitle: "Latest Job Offerings",
         }}
       />
     </JobsStack.Navigator>
@@ -105,7 +137,7 @@ function TJSection() {
     </TJStack.Navigator>
   );
 }
-function FundingSection() {
+function ForumSection() {
   return (
     <FundingStack.Navigator initialRouteName="Jobs"
     screenOptions={{
@@ -118,9 +150,9 @@ function FundingSection() {
       },
     }}
     >
-      <FundingStack.Screen name="Find Funding" component={FundingScreen}
+      <FundingStack.Screen name="Job Finder Forum " component={ForumScreen}
         options={{
-          headerTitle: "Find Funding",
+          headerTitle: "Job Finder Forum",
           headerLeft: null,
         }}
       />
@@ -140,7 +172,7 @@ function ProjectionSection() {
       },
     }}
     >
-      <FundingStack.Screen name="Future Job Projections" component={ProjectionScreen}
+      <FundingStack.Screen name="Future Job Projections" component={ResourcesSection}
         options={{
           headerTitle: "Future Job Projections",
           headerLeft: null,
@@ -270,10 +302,10 @@ export default function App() {
             )
           }}
           /> 
-          <Tab.Screen name="Funding" component={FundingSection} 
+          <Tab.Screen name="Forum" component={ForumSection} 
           options={{
             tabBarIcon: ({color}) => (
-              <MaterialIcons name="attach-money" size={26} color={themecolor} />
+              <MaterialCommunityIcons name="forum" size={26} color={themecolor} />
             ),
             headerTitle: "Resources",
           }}

@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Platform, Alert, ActivityIndicator} from 'react-
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {WebView} from 'react-native-webview'
 
-const coursescatalog = 'https://classpert.com'
+const coursescatalog = 'http://lean-course-search.surge.sh'
 
 export default class PostScreen extends React.Component{
     constructor(props) {

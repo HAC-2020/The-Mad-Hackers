@@ -1,19 +1,28 @@
 import React from 'react'
 import {View, Text, StyleSheet, FlatList, Image, RefreshControl, ScrollView} from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
-import {Ionicons, Foundation, AntDesign} from "@expo/vector-icons"
+import {Ionicons, Foundation, AntDesign,} from "@expo/vector-icons"
 const themecolor = '#fff'
 const tabcolor = '#5271ff'
 
 const jobposts = [
     {
         id: "1",
-        name: "vojoys dooto",
-        description: "Very dooto he is",
-        skills: "Being Dootoo, Being a bot",
-        avatar: require("../assets/LEAN.jpg"),
-        image: require("../assets/LEAN.jpg"),
+        description: "Salary: 76,000 Benefits: Pool ect.",
+        skills: "React Native, Vue.js",
+        title: "App Developer",
+        image: require("../assets/pic.png"),
         applicants: '1',
+        companyname: "Acme Corporation",
+    }
+]
+const company = [
+    {
+        
+        website: "example.com",
+        linkedIn: "linkedin.com/company/name",
+        image: '',
+        contact: 'acme@example.com',
     }
 ]
 export default class ProfileScreen extends React.Component{
@@ -38,18 +47,26 @@ export default class ProfileScreen extends React.Component{
       };
     renderJobPost = jobpost => {
         return (
-            <View>
-                <Image source={jobpost.avatar} style={styles.avatar}/>
+            this.state.checkingForPosts < 2 ? (<View style={{backroundColor: "#fff",paddingBottom: 100000}}>
+                <Text style={{marginTop: 15, color: '#ff0000', fontWeight: 'bold', alignSelf: 'center'}}>No Jobs Found</Text>
+                </View>):(
+                
+                <View style={{paddingBottom: 10000}}>
+                <View style={{flexDirection: "row"}}>
+                    <Image source={jobpost.image} style={styles.avatar}/>
+                    <Text style={{marginTop: 20, marginLeft: 10, fontSize: 20,}}>{jobpost.companyname}</Text>
+                </View>
                 <View style={{flex:1}}>
                     <View style={{flexDirection: "row", justifyContent: "space-between", alignItems: "center"}}>
                         <View>
-                            <Text style={styles.name}>{jobpost.name}</Text>
+                            <Text style={styles.name}>Job Type: {jobpost.title}</Text>
                         </View>
                         <Ionicons name="ios-more" size={24} color="#73788b"/>
                     </View>
 
                     <Text style={styles.jobposts}>{jobpost.description}</Text>
-                    <Image source={jobpost.image} style={styles.image} resizeMode="cover"/>
+
+                    {/* <Image source={jobpost.image} style={styles.image} resizeMode="cover"/> */}
                     <View style={{flexDirection: "row", flex: 0.8}}>
                         <AntDesign name="copy1" size={24} color="#73788B" style={{marginLeft: 16}}/>
                         <Text style={{marginLeft: 10, fontSize: 20, color:  "#838899", flex: 0.9}}>Skills: {jobpost.skills}</Text>
@@ -59,8 +76,13 @@ export default class ProfileScreen extends React.Component{
                         <Text style={{marginLeft: 10, fontSize: 20, color:  "#838899"}}>{jobpost.applicants} Applicant(s)</Text>
                     </View>
                 </View>
+
+                <TouchableOpacity style={{paddingTop: 30}} onPress={() => this.props.navigation.navigate('Form Submission')}>
+                    <Text style={{marginLeft: 10, fontSize: 20, color: `${tabcolor}`}}>Submit an Application</Text>
+                </TouchableOpacity>
                 <View style={styles.header}/>
             </View>
+            )
         )
     }
 
@@ -94,7 +116,8 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor:'#fff',
-        color:'#fff'
+        color:'#fff',
+
     },
     header: {
         paddingTop: 50,
@@ -135,16 +158,17 @@ const styles = StyleSheet.create({
     },
     jobposts: {
         marginTop: 16,
-        fontSize: 14,
+        fontSize: 18,
         color: "#838899",
         marginLeft: 20,
+        marginBottom: 20,
     },
     image: {
         width: undefined,
         marginLeft: 10,
         height: 200,
         borderRadius: 5,
-        marginVertical: 16
+        marginVertical: 16,
     }
 
 })

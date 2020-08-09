@@ -1,10 +1,9 @@
 export default firebasekeys = {
-  apiKey: "AIzaSyBRinKG0wa8nULNhGsCZg0vkEMxqmKEtMo",
-  authDomain: "omjoshiapp.firebaseapp.com",
-  databaseURL: "https://omjoshiapp.firebaseio.com",
-  projectId: "omjoshiapp",
-  storageBucket: "omjoshiapp.appspot.com",
-  messagingSenderId: "688695948267",
-  appId: "1:688695948267:web:a1f0ef092668e112d91fae",
-  measurementId: "G-YKWXX4J7R1"
+  apiKey: "AIzaSyAWnWmesrGAEnm8khsANTCLiivFHhC4LtI",
+  authDomain: "lean-job-finder.firebaseapp.com",
+  databaseURL: "https://lean-job-finder.firebaseio.com",
+  projectId: "lean-job-finder",
+  storageBucket: "lean-job-finder.appspot.com",
+  messagingSenderId: "481800294263",
+  appId: "1:481800294263:web:4aa800218f2bd905729b72"
 }

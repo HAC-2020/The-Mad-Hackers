@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Platform, Alert, ActivityIndicator} from 'react-
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import {WebView} from 'react-native-webview'
 
-const employmentprojections = 'https://datawrapper.dwcdn.net/bW99X/1/'
+const fgjprojections = 'https://datawrapper.dwcdn.net/1DDAB/1/'
 
 export default class ProjectionScreen extends React.Component{
     constructor(props) {
@@ -15,7 +15,7 @@ export default class ProjectionScreen extends React.Component{
     }
     render(){
         return(
-            <WebView source={{ uri: employmentprojections }} />
+            <WebView source={{ uri: fgjprojections }} />
         )
     }
 }
