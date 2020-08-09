@@ -3,9 +3,6 @@
         <h1 class="title is-3" style="color: #5271ff;">LEAN Online Course Search</h1>
         <p> Powered by ClassPert </p>
         <br>
-        <b-field label="Search">
-            <b-input v-model="search"></b-input>
-        </b-field>
         <section>
             <b-field position="is-centered">
             <b-input placeholder="Search..." type="search" icon="magnify">
