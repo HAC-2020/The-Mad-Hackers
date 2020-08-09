@@ -12,6 +12,8 @@
     "core-js": "^3.6.5",
     "firebase": "^7.17.2",
     "vue": "^2.6.11",
+    "vue-base64-file-upload": "^1.0.4",
+    "vue-base64-upload": "^1.0.1",
     "vue-chartjs": "^3.5.0",
     "vue-router": "^3.2.0"
   },
